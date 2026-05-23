@@ -24,6 +24,40 @@ export function createMailtoLink(email: string) {
   return `mailto:${email}`;
 }
 
+export function createSlug(value: string) {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-")
+    .slice(0, 80);
+}
+
+export function formatDisplayDate(value: string | null | undefined) {
+  if (!value) {
+    return "Date to be confirmed";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat("en-KE", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  }).format(date);
+}
+
+export function estimateReadingMinutes(value: string) {
+  const words = value.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
 export function buildMetadata({
   school,
   origin,
@@ -76,4 +110,3 @@ export function buildMetadata({
     }
   };
 }
-

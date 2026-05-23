@@ -104,6 +104,23 @@ export default function Hero({ school }: HeroProps) {
             transition={prefersReducedMotion ? undefined : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-[52rem] space-y-6 text-white"
           >
+            <motion.span
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={
+                prefersReducedMotion
+                  ? undefined
+                  : {
+                      duration: 0.5,
+                      delay: 0.02,
+                      ease: [0.22, 1, 0.36, 1]
+                    }
+              }
+              className="inline-flex rounded-full border border-white/18 bg-white/10 px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/82 backdrop-blur-sm sm:text-xs"
+            >
+              {school.hero.eyebrow}
+            </motion.span>
+
             <h1 className="space-y-1.5">
               {titleLines.map((line, index) => (
                 <motion.span
@@ -131,6 +148,23 @@ export default function Hero({ school }: HeroProps) {
               ))}
             </h1>
 
+            <motion.p
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+              animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={
+                prefersReducedMotion
+                  ? undefined
+                  : {
+                      duration: 0.55,
+                      delay: 0.2,
+                      ease: [0.22, 1, 0.36, 1]
+                    }
+              }
+              className="max-w-3xl text-base leading-8 text-white/82 sm:text-lg sm:leading-9"
+            >
+              {school.hero.intro}
+            </motion.p>
+
             <motion.div
               initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
               animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
@@ -149,14 +183,14 @@ export default function Hero({ school }: HeroProps) {
                 href="/admissions"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--school-secondary)] px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white shadow-[0_18px_48px_rgba(0,0,0,0.18)] transition-transform hover:-translate-y-0.5"
               >
-                Apply Now
+                {school.hero.primaryCta}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/contact"
+                href="/academics"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white backdrop-blur transition-transform hover:-translate-y-0.5 hover:bg-white/14"
               >
-                Contact School
+                {school.hero.secondaryCta}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </motion.div>

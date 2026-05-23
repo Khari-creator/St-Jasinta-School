@@ -195,32 +195,32 @@ export const academicPageContentBySchool: Record<SchoolId, AcademicPageContent> 
   },
   "king-david": {
     heading: "Academics",
-    intro: "Explore the structured learning pathways that shape student growth at King David Senior and Junior School.",
+    intro: "Explore the junior and senior learning pathways that shape student growth at King David Senior and Junior School.",
     sections: [
       {
         id: "junior-school",
         label: "Junior School",
         cardTitle: "Junior School",
         cardSummary:
-          "A guided CBC junior school pathway designed to build confidence, discipline, and strong academic habits from the early stages of growth.",
+          "A guided junior school pathway where younger learners grow through care, routine, confidence-building, and steady academic support.",
         heroImage: "/king-david/gallery-1.jpg",
         heroAlt: "Junior school learning at King David",
         paragraphs: [
-          "King David's junior school pathway was introduced to give learners a stronger start within a more structured academic environment. Students are guided through routines, classroom expectations, and consistent teacher support that help them grow with confidence.",
-          "Learning is aligned to the CBC approach while still maintaining the seriousness, order, and discipline that families often value in a focused school setting."
+          "King David's junior school pathway helps younger learners settle well into school life through caring guidance, clear routines, and teacher support that builds confidence day by day.",
+          "Learning is aligned to CBC expectations while keeping the school environment structured, supportive, and welcoming for children as they grow."
         ],
         listTitle: "The junior school pathway focuses on:",
         listItems: [
-          "Clear routines and stronger classroom structure",
+          "Clear routines and supportive classroom guidance",
           "CBC-aligned learner development",
-          "Confidence, discipline, and teacher guidance",
+          "Confidence-building, participation, and teacher care",
           "Preparation for higher levels of study"
         ],
-        secondaryImage: "/king-david/gallery-2.jpg",
-        secondaryImageAlt: "Junior school classroom environment at King David",
+        secondaryImage: "/king-david/gallery-4.jpeg",
+        secondaryImageAlt: "Junior learners on an educational trip at King David",
         assessmentTitle: "Junior School Support",
         assessmentIntro:
-          "Junior school learners benefit from guided routines, steady classroom structure, and closer teacher support that help them settle, progress, and build confidence.",
+          "Junior school learners benefit from guided routines, caring teacher support, and a steady school environment that helps them settle, progress, and build confidence.",
         assessmentItems: [
           "CBC-aligned classroom tasks and learner follow-up",
           "Teacher guidance on routines, participation, and consistency",
@@ -230,8 +230,8 @@ export const academicPageContentBySchool: Record<SchoolId, AcademicPageContent> 
         photoGalleryTitle: "Junior School in Focus",
         photoGallery: [
           {
-            src: "/king-david/gallery-5.jpg",
-            alt: "Junior school life at King David"
+            src: "/king-david/gallery-4.jpeg",
+            alt: "Junior learners during an educational trip at King David"
           },
           {
             src: "/king-david/gallery-1.jpg",
@@ -286,12 +286,12 @@ export const academicPageContentBySchool: Record<SchoolId, AcademicPageContent> 
         label: "Student Growth",
         cardTitle: "Student Growth",
         cardSummary:
-          "A wider school culture that develops maturity, leadership, character, and confidence alongside academic progress.",
+          "A wider school culture that develops confidence, character, leadership, and responsibility alongside academic progress.",
         heroImage: "/king-david/gallery-5.jpg",
         heroAlt: "Student growth at King David",
         paragraphs: [
-          "At King David, learning is not only about classroom performance. The school also seeks to develop responsible, confident, and disciplined students who can carry themselves well and respond positively to guidance.",
-          "This wider student development focus helps create a school environment where knowledge, character, and future readiness grow together."
+          "At King David, learning is not only about classroom performance. The school also seeks to develop responsible, confident, and disciplined learners across both junior and senior sections.",
+          "This wider student development focus helps create a school environment where knowledge, character, and future readiness grow together from the early stages upward."
         ],
         listTitle: "Student growth is supported through:",
         listItems: [

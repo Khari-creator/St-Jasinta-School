@@ -7,7 +7,7 @@ import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 import SchoolLogo from "@/components/SchoolLogo";
-import { navigationLinks, type SchoolProfile } from "@/data/schools";
+import { getNavigationLinks, type SchoolProfile } from "@/data/schools";
 import { cn } from "@/lib/utils";
 import { getAcademicMenuItems } from "@/data/academics";
 
@@ -22,6 +22,7 @@ export default function Navbar({ school, compact = false }: NavbarProps) {
   const isAcademicsRoute = pathname === "/academics" || pathname.startsWith("/academics/");
   const [isAcademicsOpen, setIsAcademicsOpen] = useState(isAcademicsRoute);
   const academicMenuItems = getAcademicMenuItems(school.id);
+  const navigationLinks = getNavigationLinks(school.id);
 
   return (
     <header

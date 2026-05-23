@@ -65,7 +65,58 @@ export type Milestone = {
 export type GalleryItem = {
   src: string;
   alt: string;
-  category: "Learning" | "School Life" | "Events" | "Facilities";
+  category: "Learning" | "School Life" | "Events" | "Facilities" | "Trips" | "Graduation";
+  title?: string;
+  isFeatured?: boolean;
+  featuredOrder?: number;
+  sortOrder?: number;
+};
+
+export type HighlightMetric = {
+  label: string;
+  value: string;
+};
+
+export type TransportFeature = {
+  title: string;
+  description: string;
+};
+
+export type TransportSupportingImage = {
+  src: string;
+  alt: string;
+  label?: string;
+};
+
+export type TransportContent = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  availabilityNote: string;
+  highlights: HighlightMetric[];
+  contactNote: string;
+  ctaLabel: string;
+  ctaHref: string;
+  features: TransportFeature[];
+  secondaryImage?: string;
+  secondaryImageAlt?: string;
+  secondaryImageLabel?: string;
+  supportingImages?: TransportSupportingImage[];
+};
+
+export type FeaturedVideoContent = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  src: string;
+  poster: string;
+  label?: string;
+  caption?: string;
+  highlights: HighlightMetric[];
+  ctaLabel?: string;
+  ctaHref?: string;
 };
 
 export type HeroProfile = {
@@ -130,6 +181,8 @@ export type SchoolProfile = {
   milestones: Milestone[];
   coCurricular: string[];
   gallery: GalleryItem[];
+  transport: TransportContent;
+  featuredVideo?: FeaturedVideoContent;
   admissions: {
     intro: string;
     steps: string[];
@@ -149,7 +202,7 @@ export type SchoolProfile = {
   };
 };
 
-export const navigationLinks: NavLink[] = [
+export const baseNavigationLinks: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Academics", href: "/academics" },
@@ -157,6 +210,18 @@ export const navigationLinks: NavLink[] = [
   { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" }
 ];
+
+export function getNavigationLinks(schoolId: SchoolId): NavLink[] {
+  if (schoolId === "st-jacinta") {
+    return [
+      ...baseNavigationLinks.slice(0, 5),
+      { label: "Blog", href: "/blog" },
+      baseNavigationLinks[5]
+    ];
+  }
+
+  return baseNavigationLinks;
+}
 
 export const schools: Record<SchoolId, SchoolProfile> = {
   "st-jacinta": {
@@ -387,6 +452,41 @@ export const schools: Record<SchoolId, SchoolProfile> = {
     ],
     gallery: [
       {
+        src: "/st-jacinta/1.jpeg",
+        alt: "Learners on a school trip at St. Jacinta",
+        category: "Trips"
+      },
+      {
+        src: "/st-jacinta/graduation.jpeg",
+        alt: "Graduation celebration moment at St. Jacinta",
+        category: "Graduation"
+      },
+      {
+        src: "/st-jacinta/graduation2.jpeg",
+        alt: "Another graduation highlight at St. Jacinta",
+        category: "Graduation"
+      },
+      {
+        src: "/st-jacinta/5.jpeg",
+        alt: "St. Jacinta learners enjoying an educational trip experience",
+        category: "Trips"
+      },
+      {
+        src: "/st-jacinta/2.jpeg",
+        alt: "Trip day moments with learners from St. Jacinta",
+        category: "Trips"
+      },
+      {
+        src: "/st-jacinta/3.jpeg",
+        alt: "Outdoor school trip activity with St. Jacinta learners",
+        category: "Trips"
+      },
+      {
+        src: "/st-jacinta/4.jpeg",
+        alt: "Shared trip experience with St. Jacinta learners",
+        category: "Trips"
+      },
+      {
         src: "/st-jacinta/gallery-1.jpg",
         alt: "Kindergarten learning at St. Jacinta",
         category: "Learning"
@@ -417,6 +517,51 @@ export const schools: Record<SchoolId, SchoolProfile> = {
         category: "Facilities"
       }
     ],
+    transport: {
+      eyebrow: "School Transport",
+      title: "Transport support that helps families begin and end the school day with greater ease.",
+      description:
+        "St. Jacinta's transport offering is presented as part of a wider family-support experience, helping parents feel more confident about movement, timing, and the daily rhythm of school life.",
+      image: "/st-jacinta/transport.jpg",
+      imageAlt: "St. Jacinta school buses supporting learner transport",
+      availabilityNote:
+        "The transport team helps reduce daily pressure for families by supporting more dependable pick-up and drop-off coordination.",
+      highlights: [
+        { label: "Daily Rhythm", value: "Smoother school-day coordination" },
+        { label: "Family Support", value: "Less stress around movement and timing" },
+        { label: "School Activities", value: "Useful for trips and shared outings" }
+      ],
+      contactNote:
+        "Families interested in routes, availability, or transport planning are encouraged to contact the school directly for the latest guidance.",
+      ctaLabel: "WhatsApp Us",
+      ctaHref: "https://wa.me/254722648983",
+      features: [
+        {
+          title: "Dependable coordination",
+          description: "Transport planning supports a more organised start and end to the day for both learners and families."
+        },
+        {
+          title: "Support for school activities",
+          description: "The school bus system also strengthens coordination for trips, visits, and shared school experiences."
+        },
+        {
+          title: "Parent-friendly communication",
+          description: "Families can speak with the school directly to confirm practical transport arrangements and current availability."
+        }
+      ],
+      supportingImages: [
+        {
+          src: "/st-jacinta/transport2.jpg",
+          alt: "School transport also supports smoother coordination for learner movement, visits, and organised school-day planning.",
+          label: "Transport in Action"
+        },
+        {
+          src: "/st-jacinta/SchoolEnviron.jpeg",
+          alt: "Learners boarding the school bus at St. Jacinta",
+          label: "Boarding Time"
+        }
+      ]
+    },
     admissions: {
       intro:
         "Families looking for a caring, disciplined, and growth-oriented learning environment are warmly welcome to begin with a school visit and conversation.",
@@ -690,6 +835,11 @@ export const schools: Record<SchoolId, SchoolProfile> = {
         category: "Learning"
       },
       {
+        src: "/king-david/gallery-4.jpeg",
+        alt: "Junior learners on an educational trip at King David",
+        category: "Events"
+      },
+      {
         src: "/king-david/gallery-3.jpg",
         alt: "Student event and participation at King David",
         category: "Events"
@@ -705,6 +855,56 @@ export const schools: Record<SchoolId, SchoolProfile> = {
         category: "Facilities"
       }
     ],
+    transport: {
+      eyebrow: "School Transport",
+      title: "Transport support that keeps school movement calm, reliable, and better coordinated.",
+      description:
+        "At King David, transport is presented as a practical extension of the school's structured culture, supporting daily learner movement and school activities without overpowering the image itself.",
+      image: "/king-david/transport.jpg",
+      imageAlt: "King David school buses during a learner trip",
+      availabilityNote:
+        "The transport option supports smoother coordination for learner movement, selected trips, and organised school-day planning.",
+      highlights: [
+        { label: "Coordination", value: "Better organised learner movement" },
+        { label: "School Trips", value: "Useful support during planned outings" },
+        { label: "Daily Routine", value: "A steadier rhythm for families" }
+      ],
+      contactNote:
+        "For route guidance, current availability, or direct clarification from the school team, families can call or message the school.",
+      ctaLabel: "WhatsApp Us",
+      ctaHref: "https://wa.me/254722648983",
+      features: [
+        {
+          title: "Structured movement support",
+          description: "Transport complements the school's orderly culture by helping daily movement feel more coordinated."
+        },
+        {
+          title: "Practical help for families",
+          description: "The service helps reduce transport uncertainty for parents who want a more dependable school routine."
+        },
+        {
+          title: "Trip-day readiness",
+          description: "School transport also supports outings and shared school activities with more organised planning."
+        }
+      ]
+    },
+    featuredVideo: {
+      eyebrow: "Kindergarten Graduation",
+      title: "A junior-school milestone that shows the warmth behind King David's structured culture.",
+      description:
+        "This kindergarten graduation highlight helps families see the younger side of King David as well, showing celebration, confidence, and meaningful learner milestones alongside the school's senior identity.",
+      src: "/king-david/kindergarten-graduation.mp4",
+      poster: "/king-david/gallery-4.jpeg",
+      label: "Junior Milestone",
+      caption: "Kindergarten graduation highlight at King David.",
+      highlights: [
+        { label: "Learner Milestone", value: "A proud early-years graduation moment" },
+        { label: "School Culture", value: "Celebration alongside discipline and growth" },
+        { label: "Family View", value: "A warmer look at the junior pathway" }
+      ],
+      ctaLabel: "Explore the Gallery",
+      ctaHref: "/gallery"
+    },
     admissions: {
       intro:
         "King David welcomes families who want a more structured and academically focused school environment for their children.",

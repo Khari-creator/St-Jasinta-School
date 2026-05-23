@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
-import { navigationLinks, type SchoolProfile } from "@/data/schools";
+import { getNavigationLinks, type SchoolProfile } from "@/data/schools";
 import {
   createMailtoLink,
   createTelLink,
@@ -17,6 +17,7 @@ export default function Footer({ school }: FooterProps) {
   const phoneReady = isValidContactValue(school.contact.phone);
   const emailReady = isValidContactValue(school.contact.email);
   const whatsappReady = isValidContactValue(school.contact.whatsapp);
+  const navigationLinks = getNavigationLinks(school.id);
 
   return (
     <footer

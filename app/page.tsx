@@ -5,13 +5,18 @@ import type { Metadata } from "next";
 
 import CTASection from "@/components/CTASection";
 import FeatureCard from "@/components/FeatureCard";
+import FeaturedVideoSection from "@/components/FeaturedVideoSection";
 import Hero from "@/components/Hero";
 import MotionReveal from "@/components/MotionReveal";
 import ParallaxBand from "@/components/ParallaxBand";
+import StJacintaBlogPreview from "@/components/blog/StJacintaBlogPreview";
 import SchoolLogo from "@/components/SchoolLogo";
 import SectionHeader from "@/components/SectionHeader";
 import StatsStrip from "@/components/StatsStrip";
+import TransportSection from "@/components/TransportSection";
 import { academicPageContentBySchool, getAcademicSectionHref } from "@/data/academics";
+import { getPublishedBlogPostsForSchool } from "@/lib/blog";
+import { getGalleryItemsForSchool } from "@/lib/gallery";
 import { getSchoolContext } from "@/lib/getSchool";
 import { buildMetadata, cn } from "@/lib/utils";
 
@@ -31,12 +36,13 @@ export default async function HomePage() {
   const softVariant = school.id === "st-jacinta";
   const stJacintaAcademics = academicPageContentBySchool["st-jacinta"].sections;
   const kingDavidAcademics = academicPageContentBySchool["king-david"].sections;
-  const featuredGalleryItem = school.gallery[0];
-  const supportingGalleryItems = school.gallery.slice(1, 3);
-  const kingDavidFeaturedGalleryItem = school.gallery[2] ?? school.gallery[0];
-  const kingDavidSupportingGalleryItems =
-    school.gallery.length > 4 ? [school.gallery[0], school.gallery[4]] : school.gallery.slice(0, 2);
-  const galleryCategories = Array.from(new Set(school.gallery.map((item) => item.category))).slice(0, 4);
+  const galleryItems = await getGalleryItemsForSchool(school.id, school.gallery);
+  const featuredGalleryItem = galleryItems[0];
+  const supportingGalleryItems = galleryItems.slice(1, 3);
+  const kingDavidFeaturedGalleryItem = galleryItems[0] ?? school.gallery[0];
+  const kingDavidSupportingGalleryItems = galleryItems.slice(1, 3);
+  const galleryCategories = Array.from(new Set(galleryItems.map((item) => item.category))).slice(0, 4);
+  const recentBlogPosts = softVariant ? await getPublishedBlogPostsForSchool(school.id, 3) : [];
   const welcomePillars = softVariant
     ? [
         {
@@ -436,6 +442,14 @@ export default async function HomePage() {
       )}
 
       {softVariant ? (
+        <StJacintaBlogPreview school={school} posts={recentBlogPosts} />
+      ) : null}
+
+      <TransportSection school={school} />
+
+      {school.featuredVideo ? <FeaturedVideoSection school={school} /> : null}
+
+      {softVariant ? (
         <section className="shell section-space pt-2">
           <div className="grid gap-10 xl:grid-cols-[0.94fr_1.06fr] xl:items-end">
             <div className="space-y-5">
@@ -446,7 +460,7 @@ export default async function HomePage() {
                 A closer look at life, learning, and growth inside St. Jacinta.
               </h2>
               <p className="max-w-3xl text-lg leading-9 text-slate-600 sm:text-[1.12rem]">
-                Explore moments that reflect the warmth of the school community, from classroom engagement and learner growth to everyday school life and memorable events.
+                Explore classroom moments, school trips, graduation highlights, and the everyday warmth that shapes the St. Jacinta learning community.
               </p>
               <div className="flex flex-wrap gap-3">
                 {galleryCategories.map((category) => (
@@ -463,16 +477,16 @@ export default async function HomePage() {
             <div className="grid gap-4 sm:grid-cols-3">
               {[
                 {
-                  label: "Learning Moments",
-                  value: "CBC Classrooms"
+                  label: "School Trips",
+                  value: "Shared Discovery"
                 },
                 {
-                  label: "School Life",
+                  label: "Graduation",
+                  value: "Proud Milestones"
+                },
+                {
+                  label: "Learning",
                   value: "Daily Growth"
-                },
-                {
-                  label: "Events",
-                  value: "Community Spirit"
                 }
               ].map((item) => (
                 <article
@@ -553,14 +567,14 @@ export default async function HomePage() {
                 The gallery helps families feel the atmosphere before they visit.
               </h3>
               <p className="mt-4 text-base leading-8 text-slate-600">
-                Through real classroom moments, school life highlights, and event coverage, families gain a clearer picture of the environment their children would grow in each day.
+                Through school trips, graduation moments, classroom experiences, and everyday learner life, families gain a fuller picture of the environment their children would grow in each day.
               </p>
             </article>
 
             <article className="rounded-[1.7rem] border border-slate-200 bg-white px-6 py-6 shadow-[0_18px_38px_-30px_rgba(15,23,42,0.16)] sm:px-7">
               <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Explore More</p>
               <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
-                See more of school life, learning, and community moments.
+                See more of school trips, graduation highlights, learning, and community moments.
               </h3>
               <div className="mt-6">
                 <Link

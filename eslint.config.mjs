@@ -13,12 +13,8 @@ const eslintConfig = [
   {
     ignores: [".next/**", ".next*/**", "node_modules/**", "next-env.d.ts"]
   },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-  {
-    rules: {
-      "react/display-name": "off"
-    }
-  }
+  ...compat.extends("next/core-web-vitals", "next/typescript")
 ];
 
 export default eslintConfig;
+
